@@ -1,0 +1,66 @@
+<!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+{{!-- Charts.js --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="/vendor/metisMenu/metisMenu.min.js"></script>
+
+
+{{#if morris}}
+	<!-- Morris Charts JavaScript -->
+	<script src="/vendor/raphael/raphael.min.js"></script>
+	<script src="/vendor/morrisjs/morris.min.js"></script>
+	<script src="/data/morris-data.js"></script>
+{{/if}}
+
+{{#if flot}}
+	<!-- Flot Charts JavaScript -->
+	<script src="/vendor/flot/excanvas.min.js"></script>
+	<script src="/vendor/flot/jquery.flot.js"></script>
+	<script src="/vendor/flot/jquery.flot.pie.js"></script>
+	<script src="/vendor/flot/jquery.flot.resize.js"></script>
+	<script src="/vendor/flot/jquery.flot.time.js"></script>
+	<script src="/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+	<script src="/data/flot-data.js"></script>
+{{/if}}
+
+	<!-- DataTables JavaScript -->
+	<script src="/vendor/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+	<script src="/vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+<script src="/dist/js/sb-admin-2.js"></script>  
+
+{{!-- Back to Top Button --}}
+<script>
+	// Get the button
+	var backToTopBtn = document.getElementById("backToTopBtn");
+
+	// When the user scrolls down 20px from the top of the document, show the button
+	window.onscroll = function() {scrollFunction()};
+
+	function scrollFunction() {
+		if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
+		backToTopBtn.style.display = "block";
+		} else {
+		backToTopBtn.style.display = "none";
+		}
+	}
+
+	// When the user clicks on the button, scroll to the top of the document
+	backToTopBtn.addEventListener("click", function() {
+		window.scrollTo({
+		top: 0,
+		behavior: "smooth"
+		});
+		// document.body.scrollTop = 0; // For Safari
+		//document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	});
+</script>
