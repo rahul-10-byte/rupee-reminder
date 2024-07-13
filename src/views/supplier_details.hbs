@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> head}}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
+
+<body>
+
+    <div id="wrapper">
+
+        {{> navbar}}
+
+        {{> sidenav}}
+
+        <button id="backToTopBtn" class="back-to-top-btn"><i class="fa-solid fa-angle-up fa-2x"></i></button>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Supplier Details</h1>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Supplier Details
+                                <button class="btn btn-success btn-sm" id="addCustomer" style="float: right;"
+                                    data-toggle="modal" data-target="#addModal"> + Add
+                                    Supplier</button>
+
+                                <!-- Edit Modal -->
+                                <div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="editModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header"
+                                                style="background:linear-gradient(to right, #b92b27, #1565c0); color:azure;">
+                                                <h1 class="modal-title" id="addModalLabel">Add Supplier</h1>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="editForm">
+                                                    <div class="form-group">
+                                                        <label for="addSupplierName">Supplier Name</label>
+                                                        <input type="text" class="form-control" id="addSupplierName"
+                                                            name="SupplierName">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="addSupplierEmail">Email</label>
+                                                        <input type="text" class="form-control" id="addSupplierEmail"
+                                                            name="SupplierEmail">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="addSupplierAddress">Address</label>
+                                                        <input type="text" class="form-control" id="addSupplierAddress"
+                                                            name="SupplierAddress">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="addSupplierPhone">Phone</label>
+                                                        <input type="text" class="form-control" id="addSupplierPhone"
+                                                            name="SupplierPhone">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    onclick="addSupplier()">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <table id="supplier_table" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Supplier Name</th>
+                                            <th>Supplier Email</th>
+                                            <th>Supplier Phone</th>
+                                            <th>Supplier Address</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each supplierDetails}}
+                                        <tr>
+                                            <td>{{this.supplier_id}}</td>
+                                            <td>{{this.supplier_name}}</td>
+                                            <td>{{this.supplier_email}}</td>
+                                            <td>{{this.supplier_phone}}</td>
+                                            <td>{{this.supplier_address}}</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm" id="editModalButton"
+                                                    data-toggle="modal" data-target="#editModal"
+                                                    data-id="{{{supplier_id}}}">Edit</button>
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+
+                                </table>
+
+
+                                <!-- Edit Modal -->
+                                <div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="editModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header"
+                                                style="background:linear-gradient(to right, #b92b27, #1565c0); color:azure;">
+                                                <h1 class="modal-title" id="editModalLabel">Edit Supplier</h1>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="editForm">
+                                                    <div class="form-group">
+                                                        <label for="editSupplierName">Supplier Name</label>
+                                                        <input type="text" class="form-control" id="editSupplierName"
+                                                            name="supplierName">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="editSupplierEmail">Email</label>
+                                                        <input type="text" class="form-control" id="editSupplierEmail"
+                                                            name="supplierEmail">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="editSupplierAddress">Address</label>
+                                                        <input type="text" class="form-control" id="editSupplierAddress"
+                                                            name="supplierAddress">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="editSupplierPhone">Phone</label>
+                                                        <input type="text" class="form-control" id="editSupplierPhone"
+                                                            name="supplierPhone">
+                                                    </div>
+                                                    <input type="hidden" id="editEntryId" name="id">
+                                                    <!-- Hidden field to store the entry ID -->
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    onclick="saveChanges()">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    {{> scripts}}
+
+
+</body>
+
+<script>
+    $(document).ready(function () {
+        $('#supplier_table').DataTable({
+            scrollX: true,
+            order: [[0, 'desc']]
+        });
+    });
+
+    $(document).on('click', '#editModalButton', function () {
+        var row = $(this).closest('tr');
+
+        var id = row.find('td:eq(0)').text();
+        var supplierName = row.find('td:eq(1)').text();
+        var supplierEmail = row.find('td:eq(2)').text();
+        var supplierPhone = row.find('td:eq(3)').text();
+        var supplierAddress = row.find('td:eq(4)').text();
+
+        $('#editEntryId').val(id);
+        $('#editSupplierName').val(supplierName);
+        $('#editSupplierEmail').val(supplierEmail);
+        $('#editSupplierPhone').val(supplierPhone);
+        $('#editSupplierAddress').val(supplierAddress);
+
+        $('#editModal').modal('show');
+    });
+
+    function addSupplier() {
+        var supplierName = $('#addSupplierName').val();
+        var supplierEmail = $('#addSupplierEmail').val();
+        var supplierPhone = $('#addSupplierPhone').val();
+        var supplierAddress = $('#addSupplierAddress').val();
+
+        console.log(supplierName, supplierEmail, supplierPhone, supplierAddress);
+
+        $.ajax({
+            url: '/addSupplierDetails',
+            type: 'POST',
+            data: { supplierName, supplierEmail, supplierPhone, supplierAddress },
+            success: function (response) {
+                if (response.success) {
+                    console.log('Entry updated successfully');
+                    $('#addModal').modal('hide');
+
+                    // Show SweetAlert2 popup
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Data Updated',
+                        text: 'Your data updated successfully!',
+                        confirmButtonText: 'OK'
+                    });
+                } else {
+                    console.error('Failed to update entry:', response.error);
+                }
+            },
+            error: function (error) {
+                console.error('AJAX error:', error);
+            }
+        });
+    }
+
+    function saveChanges() {
+        var id = $('#editEntryId').val();
+        var supplierName = $('#editSupplierName').val();
+        var supplierEmail = $('#editSupplierEmail').val();
+        var supplierPhone = $('#editSupplierPhone').val();
+        var supplierAddress = $('#editSupplierAddress').val();
+
+        console.log(id, supplierName, supplierEmail, supplierPhone, supplierAddress);
+
+        $.ajax({
+            url: '/updateSupplierDetails',
+            type: 'POST',
+            data: { id, supplierName, supplierEmail, supplierPhone, supplierAddress },
+            success: function (response) {
+                if (response.success) {
+                    console.log('Entry updated successfully');
+                    $('#editModal').modal('hide');
+
+                    // Show SweetAlert2 popup
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Data Updated',
+                        text: 'Your data updated successfully!',
+                        confirmButtonText: 'OK'
+                    });
+                } else {
+                    console.error('Failed to update entry:', response.error);
+                }
+            },
+            error: function (error) {
+                console.error('AJAX error:', error);
+            }
+        });
+    }
+</script>
+
+</html>
